@@ -9,7 +9,8 @@ public class Player_Controler : MonoBehaviour {
 	public float max_walking_speed ; 
 	public float walk_acceleration ; 
 	public float dash_force ; 
-	public float walking_brake ; 
+	public float walking_brake ;
+    public float walk_inpulse;
 
 
 
@@ -21,19 +22,12 @@ public class Player_Controler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		Vector3 dir_in = new Vector3(Input.GetAxis("Horizontal"), 0 , Input.GetAxis("Vertical"));
+		Vector3 dir_in =  new Vector3(Input.GetAxis("Horizontal"), 0 , Input.GetAxis("Vertical"));
 
 
 
 		if(dir_in.magnitude > 0.01f)
 		{
-
-/* 			if(Vector3.Dot(transform.forward, dir_in.normalized) < 0)
-			{
-				rb.velocity *= 0.5f; 
-				rb.angularVelocity = Vector3.zero; 
-				Debug.Log("STOP");
-			} */
 
 			transform.forward = dir_in;
 
@@ -50,9 +44,15 @@ public class Player_Controler : MonoBehaviour {
 			//Walking
 			else
 			{
-				if(rb.velocity.magnitude < max_walking_speed)
+
+                if (rb.velocity.magnitude < max_walking_speed * 0.2)
+                {
+                    rb.AddForce(dir_in * walk_inpulse, ForceMode.Impulse);
+                    Debug.Log("PULSE");
+                }
+                if (rb.velocity.magnitude < max_walking_speed)
 				{
-					rb.AddForce(dir_in * walk_acceleration * Time.deltaTime, ForceMode.VelocityChange);
+					rb.AddForce(dir_in * walk_acceleration, ForceMode.Force);
 					Debug.Log("WALK");
 				}
 				else
