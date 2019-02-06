@@ -1,16 +1,36 @@
 fileFormatVersion: 2
-guid: a1cee149a51bc412db235ffdfaada765
+guid: 1d229f000e4e84c38990b18e9b27e8de
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Hockey_Gates_model
+    100002: Box007
+    100004: default
     400000: //RootNode
-    400002: Hockey_Gates_model
-    2100000: Hockey_Gates_modelMat
-    2300000: Hockey_Gates_model
-    3300000: Hockey_Gates_model
-    4300000: Hockey_Gates_model
+    400002: Box007
+    400004: default
+    2100000: 20___Default
+    2100002: Material__694
+    2100004: 04___Default
+    2100006: 14___Default
+    2100008: 08___Default
+    2100010: 10___Default
+    2100012: 01___Default
+    2100014: 02___Default
+    2100016: Material__853
+    2100018: 15___Default
+    2100020: Material__852
+    2100022: Material__856
+    2100024: Material__855
+    2100026: 13___Default
+    2100028: Material__857
+    2100030: Material__854
+    2300000: Box007
+    2300002: default
+    3300000: Box007
+    3300002: default
+    4300000: Box007
+    4300002: default
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -43,7 +63,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 0.1
-    meshCompression: 3
+    meshCompression: 0
     addColliders: 0
     importVisibility: 1
     importBlendShapes: 1

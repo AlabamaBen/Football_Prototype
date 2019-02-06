@@ -28,6 +28,7 @@ public class Ball : MonoBehaviour {
 		{
 			ps.Play();
 			mr.enabled = false;
+			gameObject.SetActive(false);
 			Invoke("Reset_Position", 1.5f);
 		}
 
@@ -35,6 +36,7 @@ public class Ball : MonoBehaviour {
 
 	private void Reset_Position()
 	{
+		gameObject.SetActive(true);		
 		mr.enabled = true;
 		transform.position = start_position.position; 
 		transform.rotation = start_position.rotation; 
