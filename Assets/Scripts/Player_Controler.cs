@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player_Controler : MonoBehaviour {
 
 
+	public Animator animator; 
+
     public float Speed = 5f;
     public float JumpHeight = 2f;
     public float GroundDistance = 0.2f;
@@ -22,20 +24,24 @@ public class Player_Controler : MonoBehaviour {
         //_groundChecker = transform.GetChild(0);
     }
 
-    void Update()
+
+    void FixedUpdate()
     {
 
 		/*         _isGrounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore); */
         _inputs = Vector3.zero;
         _inputs.x = Input.GetAxis("Horizontal");
         _inputs.z = Input.GetAxis("Vertical");
-		if(_inputs.magnitude > 0.1f)
+		if(_inputs.magnitude < 0.1f)
 		{
 			_body.angularVelocity = Vector3.zero;
+			animator.SetBool("Running", false); 
 		}
         if (_inputs != Vector3.zero)
 		{
 			transform.forward = _inputs;
+			_body.MovePosition(_body.position + _inputs * Speed * Time.fixedDeltaTime);
+			animator.SetBool("Running", true); 
 		}
 
 		/*         if (Input.GetButtonDown("Jump") && _isGrounded)
@@ -47,12 +53,6 @@ public class Player_Controler : MonoBehaviour {
             Vector3 dashVelocity = Vector3.Scale(transform.forward, DashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime)));
             _body.AddForce(dashVelocity, ForceMode.VelocityChange);
         }
-    }
-
-
-    void FixedUpdate()
-    {
-        _body.MovePosition(_body.position + _inputs * Speed * Time.fixedDeltaTime);
     }
 
 
