@@ -13,6 +13,8 @@ public class Player_Controler : MonoBehaviour {
     public float DashDistance = 5f;
     public LayerMask Ground;
 
+    public float Dribble_Force ; 
+
     private Rigidbody _body;
     private Vector3 _inputs = Vector3.zero;
     //private bool _isGrounded = true;
@@ -23,6 +25,31 @@ public class Player_Controler : MonoBehaviour {
         _body = GetComponent<Rigidbody>();
         //_groundChecker = transform.GetChild(0);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.tag == "Ball")
+        {
+
+
+            _inputs = Vector3.zero;
+            _inputs.x = Input.GetAxis("Horizontal");
+            _inputs.z = Input.GetAxis("Vertical");
+            if (_inputs.magnitude > 0.1f)
+            {
+                Vector3 direction = _inputs.normalized;
+
+                direction = new Vector3(direction.x, 0.6f, direction.z);
+
+                Debug.Log("Dribble : " + direction);
+
+                other.gameObject.GetComponent<Ball>().Kick(direction, Dribble_Force);
+            }
+
+        }
+    }
+
 
 
     void FixedUpdate()

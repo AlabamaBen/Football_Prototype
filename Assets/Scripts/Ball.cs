@@ -10,6 +10,8 @@ public class Ball : MonoBehaviour {
 	MeshRenderer mr; 
 	public ParticleSystem ps;
 
+    public float Kick_Cooldown = 0.5f;
+
 	bool _spawning = false; 
 
 	
@@ -38,7 +40,24 @@ public class Ball : MonoBehaviour {
 
 	}
 
-	private void Reset_Position()
+    bool can_Kick = true; 
+
+    public void Kick(Vector3 direction, float force)
+    {
+        if(can_Kick)
+        {
+            rb.AddForce(direction * force, ForceMode.Impulse);
+            can_Kick = false;
+            Invoke("Reset_Kick", Kick_Cooldown);
+        }
+    }
+
+    public void Reset_Kick()
+    {
+        can_Kick = true;
+    }
+
+    private void Reset_Position()
 	{
 		mr.enabled = true;
 		_spawning = false; 
